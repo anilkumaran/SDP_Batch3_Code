@@ -1,0 +1,83 @@
+def div(num):
+    if len(num)==1:
+        return num
+    else:
+        s=0
+        num=list(map(int,num))
+        for i in (num):
+            s+=i
+        return div(str(s))
+
+def div_7(i):
+    if len(i)==1:
+        return i
+    else:
+        a=int(i[-1])*2
+        b=int(i[:-1])
+        b=abs(b-a)
+    return div_7(str(b))
+
+def div_8(num):
+    if len(num)==1:
+        return num
+    else:
+        if len(num)>2 and num[-3] in ["1","3","5","7","9"]:
+            c=int(num[:-1])+4
+            c=str(c)
+        else:
+            c=num[-2:]
+        a=(int(c[:-1]))*2+int(c[-1])
+        return div_8(str(a))     
+    
+        
+def div_4(four):
+    l=len(four)
+    if(l==1 and four in["4","8"]):
+        return True
+    elif(l>1 and four[-2] in["2","4","6","0","8"]and four[-1]in["4","8","0"]):
+        return True
+    elif((l>1) and four[-2] in ["1","5","3","7","9",] and four[-1] in ["2","6"]):
+        return True
+        
+n=input().split()
+for i in n:
+    try:
+        c=""
+        div_2=i[-1]in["0","2","4","6","8"]
+        if(div_2):
+            c+="2"
+
+        #for 3
+        if(div(i) in ["3","6","9"]):
+            c+="3"
+
+        #for 4
+        if(div_4(i) in ["4","8"]):
+            c+="4"
+
+        #for 5
+        if(i[-1] in["0","5"]):
+            c+="5"
+
+        #for 6
+        if("2" in c and "3" in c):
+            c+="6"
+
+        #for 7
+        if(div_7(i) in ["0","7"]):
+            c+="7"
+
+        #for 8
+        if(div_8(i) in["0","8"]):
+            c+="8"
+
+        #for 9    
+        if(div(i)=="9"):
+            c+="9"
+
+
+        x=",".join(c)
+        print(i,": is divisible by {}".format(x))
+    except:
+        print(i,":Invalid Number")
+        
