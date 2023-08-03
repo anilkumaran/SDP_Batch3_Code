@@ -1,0 +1,84 @@
+def sum_of_digits(number):
+    sum = 0
+    for i in number:
+        sum += int(i)
+    if sum > 9 :
+        sum = sum_of_digits(str(sum))
+    return sum
+
+def divisible_by_2(number):
+    
+    if int(number[-1]) in (2,4,6,8,0) and int(number) > 0:
+        l.append("2")
+        
+def divisible_by_3(number):
+    if sum_of_digits(number) in (3,6,9):
+        l.append("3")
+
+def divisible_by_4(number):
+    if len(number) > 1:
+        if int(number[-2]) in (0,2,4,6,8):
+            if int(number[-1]) in (0,4,8):
+                l.append("4")
+        elif int(number[-2]) in (1,3,5,7,9):
+            if int(number[-1]) in (2,6):
+                l.append("4")
+    elif int(number) in (4,8):
+        l.append("4")
+
+def divisible_by_5(number):
+    if int(number[-1]) in (0,5) and int(number) > 0 :
+        l.append("5")
+
+def divisible_by_6():
+    if "2" in l and "3" in l:
+        l.append("6")
+
+def divisible_by_7(num):
+    if len(num) < 3 :
+        if int(num) in list(range(7,100,7)):
+            l.append("7")
+    if len(num) > 2 :
+        a = int(num[-1]) *5
+        b = int(num[:-1]) + a
+        return divisible_by_7(str(b))
+
+def divisible_by_8(number):
+    if len(number) == 1 and int(number) == 8:
+        l.append("8")
+    total = 0
+    if len(number) > 1:
+        digi = number[:len(number)-1]
+        total = int(digi) * 2 + int(number[-1]) 
+      
+    if total > 9:
+        total = divisible_by_8(str(total))
+    return total
+
+def divisible_by_9(number):
+    if sum_of_digits(number) == 9:
+        l.append("9")
+
+li = map(int,input().split(","))
+
+for i in li:
+    result = "{} is divisible with".format(i)
+    if i < 0 :
+        i = -1 * i
+    elif i == 0 :
+        print(result,"any number")
+        continue
+    i = str(i)
+    l = []
+    divisible_by_2(i)
+    divisible_by_3(i)
+    divisible_by_4(i)
+    divisible_by_5(i)
+    divisible_by_6()
+    divisible_by_7(i)
+    if divisible_by_8(i) == 8 :
+        l.append("8")
+    
+    divisible_by_9(i)
+
+    print(result ,",".join(l))
